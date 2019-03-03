@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('auth/callback/twitch', 'SocialAuthController@callback');
+Route::get('auth/redirect/twitch', 'SocialAuthController@redirect');
