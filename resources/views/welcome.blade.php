@@ -8,10 +8,11 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
 
         <!-- Styles -->
         <style>
-            html, body {
+            /* html, body {
                 background-color: #fff;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
@@ -60,28 +61,64 @@
 
             .m-b-md {
                 margin-bottom: 30px;
-            }
+            } */
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            <div class="top-right links">
-                @auth
-                    <a href="https://www.twitch.tv/{{ Auth::user()->username }}" target="_blank">{{ Auth::user()->username }}</a>
-                @endauth
-                <a href="{{ url('/') }}">Home</a>
-                @auth
-                    <a href="{{ url('/auth/logout') }}">Logout</a>
+        <div class="container">
+            <nav class="level">
+                <div class="level-left">
+                <div class="level-item">
+                    <p class="subtitle is-5">Twitch Notes</p>
+
+                </div>
+
+                </div>
+
+                <div class="level-right">
+                    @auth
+                    <p class="level-item">
+                        <a href="https://www.twitch.tv/{{ Auth::user()->username }}" target="_blank">
+                            <img src="{{ Auth::user()->avatar }}" width="30" />
+                        </a>
+                    </p>
+                    <p class="level-item">{{ Auth::user()->username }}</p>
+                    @endauth
+
+                    <p class="level-item"><a href="{{ url('/') }}">Home</a></p>
+
+                    @auth
+                        <p class="level-item"><a href="{{ url('/auth/logout') }}">Logout</a></p>
                     @else
-                    <a href="{{ url('/auth/logout') }}">Login</a>
-                @endauth
+                        <p class="level-item"><a href="{{ url('/auth/logout') }}">Login</a></p>
+                    @endauth
+                </div>
+            </nav>
+
+            <div class="top-right links">
+
             </div>
 
             <div class="content">
-                <div class="title m-b-md">
-                    Twitch Notes
-                </div>
+                <h4>Add Streamer</h4>
 
+                <form action="/streamers" method="POST">
+                    @csrf
+
+                    <div class="field">
+                        <label class="label">Name</label>
+                        <div class="control">
+                            <input class="input" type="text" name="nickname" placeholder="Stramer nickname">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-link" type="submit">Add Streamer</button>
+                        </div>
+                    </div>
+
+                </form>
 
             </div>
         </div>
