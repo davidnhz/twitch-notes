@@ -17,4 +17,7 @@ Route::get('/', function () {
 
 
 Route::get('auth/callback/twitch', 'SocialAuthController@callback');
-Route::get('auth/redirect/twitch', 'SocialAuthController@redirect');
+Route::get('login', [ 'as' => 'login', 'uses' => 'SocialAuthController@redirect']);
+Route::get('logout', 'SocialAuthController@logout');
+
+Route::resource('streamers', 'StreamersController');

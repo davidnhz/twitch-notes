@@ -36,4 +36,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function streamers()
+    {
+        return $this->hasMany(Streamers::class, 'user_id');
+    }
 }

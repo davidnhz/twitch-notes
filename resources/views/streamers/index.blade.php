@@ -49,12 +49,35 @@
             </div>
 
             <div class="content">
-                <h4>Welcome!</h4>
-                @auth
-                    <p>Go to <a href="{{ url('/streamers') }}">Streamers</a> to start!</p>
-                @else
-                    <p>Please <a href="{{ url('/login') }}">login</a> to start!</p>
-                @endauth
+                <h4>Add Streamer</h4>
+
+                <form action="/streamers" method="POST">
+                    @csrf
+
+                    <div class="field">
+                        <label class="label">Name</label>
+                        <div class="control">
+                            <input class="input" type="text" name="nickname" placeholder="Stramer nickname">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <button class="button is-link" type="submit">Add Streamer</button>
+                        </div>
+                    </div>
+
+                </form>
+
+                @if($streamers)
+                    <h4>My favorite streamers</h4>
+                    <ul>
+                        @foreach($streamers as $streamer)
+                            <li><a href="/streamers/{{ $streamer->id }}">{{ $streamer->nickname }}</a></li>
+                        @endforeach
+                    </ul>
+                @endif
+
             </div>
         </div>
     </body>

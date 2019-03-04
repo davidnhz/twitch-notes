@@ -7,11 +7,15 @@
         <title>Twitch Notes</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        {{-- <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet"> --}}
 
         <!-- Styles -->
-        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
-
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+        <style>
+            iframe {
+                height: 480px;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
@@ -19,7 +23,6 @@
                 <div class="level-left">
                 <div class="level-item">
                     <p class="subtitle is-5">Twitch Notes</p>
-
                 </div>
 
                 </div>
@@ -44,18 +47,25 @@
                 </div>
             </nav>
 
-            <div class="top-right links">
-
-            </div>
 
             <div class="content">
-                <h4>Welcome!</h4>
-                @auth
-                    <p>Go to <a href="{{ url('/streamers') }}">Streamers</a> to start!</p>
-                @else
-                    <p>Please <a href="{{ url('/login') }}">login</a> to start!</p>
-                @endauth
+                <a href="https://www.twitch.tv/{{ $streamer->nickname }}" target="_blank">
+                    <h1>{{ $streamer->nickname }}</h1>
+                </a>
+                <div id="twitch-embed"></div>
             </div>
         </div>
+
+    <!-- Load the Twitch embed script -->
+    <script src="https://embed.twitch.tv/embed/v1.js"></script>
+
+    <!-- Create a Twitch.Embed object that will render within the "twitch-embed" root element. -->
+    <script type="text/javascript">
+        new Twitch.Embed("twitch-embed", {
+          width: 1152,
+          height: 800,
+          channel: "{{ $streamer->nickname }}"
+        });
+    </script>
     </body>
 </html>

@@ -10,18 +10,21 @@ use Auth;
 
 class SocialAuthController extends Controller
 {
-    public function callback(){
+    public function callback()
+    {
         $user = $this->createOrGetUser(Socialite::driver('twitch'));
         auth()->login($user);
 
-        return redirect()->to('/');
+        return redirect()->to('/streamers');
     }
 
-    public function redirect() {
+    public function redirect()
+    {
         return Socialite::driver('twitch')->redirect();
     }
 
-    private function createOrGetUser(\SocialiteProviders\Twitch\Provider $provider) {
+    private function createOrGetUser(\SocialiteProviders\Twitch\Provider $provider)
+    {
         $auth_user = $provider->user();
 
         $user = User::whereTwitchId($auth_user->getId())
@@ -39,7 +42,8 @@ class SocialAuthController extends Controller
         return $user;
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         Auth::logout();
         return redirect('/');
     }

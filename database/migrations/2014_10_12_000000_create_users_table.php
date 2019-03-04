@@ -15,7 +15,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('twitch_id')->unsigned();
+            $table->unsignedInteger('twitch_id');
             $table->string('username');
             $table->string('avatar')->nullable();
             $table->string('email')->unique();
