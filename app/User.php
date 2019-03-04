@@ -39,6 +39,6 @@ class User extends Authenticatable
 
     public function streamers()
     {
-        return $this->hasMany(Streamers::class, 'user_id');
+        return $this->hasMany(Streamer::class, 'user_id');
     }
 }

@@ -21,8 +21,7 @@ class StreamersController extends Controller
      */
     public function index()
     {
-        // $streamers = auth()->user()->streamers;
-        $streamers = Streamer::where('user_id', auth()->id())->get();
+        $streamers = auth()->user()->streamers;
 
         return view('streamers.index', compact('streamers'));
     }
