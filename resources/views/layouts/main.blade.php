@@ -15,6 +15,9 @@
             iframe {
                 height: 480px;
             }
+            .list p.list-item {
+                margin: 0;
+            }
         </style>
     </head>
     <body>

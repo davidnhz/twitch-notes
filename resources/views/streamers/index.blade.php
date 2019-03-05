@@ -29,11 +29,35 @@
             <div class="container">
                 @if($streamers)
                     <h4>My favorite streamers</h4>
-                    <div class="list is-hoverable">
-                        @foreach($streamers as $streamer)
-                            <a class="list-item" href="/streamers/{{ $streamer->id }}">{{ $streamer->nickname }}</a>
-                        @endforeach
+                    <div class="columns">
+                        <div class="column is-half">
+                            <table class="table is-bordered is-striped is-narrow is-hoverable">
+                                <tbody>
+                                    @foreach($streamers as $streamer)
+                                        <tr>
+                                            <td>
+                                                <a href="/streamers/{{ $streamer->id }}">{{ $streamer->nickname }}</a>
+                                            </td>
+                                            <td>
+                                                <form action="/streamers/{{ $streamer->id }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <div class="block">
+                                                        <span class="tag is-danger">
+                                                            Delete
+                                                            <button class="delete" type="submit">Delete Project</button>
+                                                        </span>
+                                                    </div>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                      @endforeach
+                                </tbody>
+                            </table>
+
+                        </div>
                     </div>
+
                 @endif
             </div>
         </div>

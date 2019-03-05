@@ -130,9 +130,13 @@ class StreamersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Streamer $streamer)
     {
-        //
+        abort_if($streamer->user_id !== auth()->id(), 403);
+
+        $streamer->delete();
+
+        return redirect('/streamers');
     }
 
     protected function validateStreamer()
