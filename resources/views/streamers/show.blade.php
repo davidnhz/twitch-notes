@@ -19,7 +19,7 @@
                         @foreach($videos as $video)
                             <a class="list-item" href="{{ $video->url }}">
                                 @if ($video->thumbnail_url)
-                                    <img src="{{ str_replace_first('%{height}','60',str_replace_first('%{width}','100', $video->thumbnail_url)) }}" alt="">
+                                    <img src="{{ $video->thumbnail_url }}" alt="">
                                 @endif
                                 {{ $video->title }}
                             </a>

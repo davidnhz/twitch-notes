@@ -8,10 +8,13 @@ use App\Streamer;
 
 class StreamersController extends Controller
 {
+    protected $client;
 
     public function __construct()
     {
         $this->middleware('auth');
+
+        $this->client = $client = new \GuzzleHttp\Client();
     }
 
     /**
@@ -27,16 +30,6 @@ class StreamersController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -47,8 +40,7 @@ class StreamersController extends Controller
         $attributes = $this->validateStreamer();
         $attributes['user_id'] = auth()->id();
 
-        $client = new \GuzzleHttp\Client();
-        $request = $client->request('GET', 'https://api.twitch.tv/helix/users', [
+        $request = $this->client->request('GET', 'https://api.twitch.tv/helix/users', [
             'headers' => ['Client-ID' => env('TWITCH_KEY')],
             'query' => ['login' => $attributes['nickname']],
         ]);
@@ -75,8 +67,7 @@ class StreamersController extends Controller
 
         $videos = [];
 
-        $client = new \GuzzleHttp\Client();
-        $request = $client->request('GET', 'https://api.twitch.tv/helix/videos', [
+        $request = $this->client->request('GET', 'https://api.twitch.tv/helix/videos', [
             'headers' => ['Client-ID' => env('TWITCH_KEY')],
             'query' => [
                 'user_id' => $streamer->twitch_id,
@@ -87,6 +78,11 @@ class StreamersController extends Controller
         if ($request->getStatusCode() === 200) {
             $response = json_decode($request->getBody()->getContents());
             $videos = $response->data;
+
+            $videos = array_map(function($video){
+                $video->thumbnail_url = str_replace_first('%{height}','60', str_replace_first('%{width}', '100', $video->thumbnail_url));
+                return $video;
+            }, $videos);
         }
 
         return view('streamers.show', compact('streamer', 'videos'));
