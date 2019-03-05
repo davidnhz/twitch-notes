@@ -7,6 +7,27 @@
             <h1>{{ $streamer->nickname }}</h1>
         </a>
         <div id="twitch-embed"></div>
+
+        <div class="columns">
+            <div class="column">
+                <h2>Notes</h2>
+            </div>
+            <div class="column">
+                <h2>Latest videos</h2>
+                @if ($videos)
+                    <div class="list is-hoverable">
+                        @foreach($videos as $video)
+                            <a class="list-item" href="{{ $video->url }}">
+                                @if ($video->thumbnail_url)
+                                    <img src="{{ str_replace_first('%{height}','60',str_replace_first('%{width}','100', $video->thumbnail_url)) }}" alt="">
+                                @endif
+                                {{ $video->title }}
+                            </a>
+                        @endforeach
+                        </div>
+                @endif
+            </div>
+        </div>
     </div>
 
     <!-- Load the Twitch embed script -->

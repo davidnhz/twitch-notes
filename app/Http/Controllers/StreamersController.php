@@ -23,6 +23,15 @@ class StreamersController extends Controller
     {
         $streamers = auth()->user()->streamers;
 
+        $client = new \GuzzleHttp\Client();
+        // dd(env('TWITCH_KEY'));
+        $request = $client->request('GET', 'https://api.twitch.tv/helix/videos', [
+            'headers' => ['Client-ID' => env('TWITCH_KEY')],
+            'query' => ['id' => '388692160'],
+        ]);
+        // dd(json_decode($request->getBody()->getContents()));
+        // dd($response = $request->getBody()->getContents());
+
         return view('streamers.index', compact('streamers'));
     }
 
@@ -47,7 +56,18 @@ class StreamersController extends Controller
         $attributes = $this->validateStreamer();
         $attributes['user_id'] = auth()->id();
 
-        $streamer = Streamer::create($attributes);
+        $client = new \GuzzleHttp\Client();
+        $request = $client->request('GET', 'https://api.twitch.tv/helix/users', [
+            'headers' => ['Client-ID' => env('TWITCH_KEY')],
+            'query' => ['login' => $attributes['nickname']],
+        ]);
+
+        if ($request->getStatusCode() === 200) {
+            $response = json_decode($request->getBody()->getContents());
+            $attributes['twitch_id'] = $response->data[0]->id;
+
+            $streamer = Streamer::create($attributes);
+        }
 
         return redirect('/streamers');
     }
@@ -62,7 +82,23 @@ class StreamersController extends Controller
     {
         abort_if($streamer->user_id !== auth()->id(), 403);
 
-        return view('streamers.show', compact('streamer'));
+        $videos = [];
+
+        $client = new \GuzzleHttp\Client();
+        $request = $client->request('GET', 'https://api.twitch.tv/helix/videos', [
+            'headers' => ['Client-ID' => env('TWITCH_KEY')],
+            'query' => [
+                'user_id' => $streamer->twitch_id,
+                'first' => 10,
+            ],
+        ]);
+
+        if ($request->getStatusCode() === 200) {
+            $response = json_decode($request->getBody()->getContents());
+            $videos = $response->data;
+        }
+
+        return view('streamers.show', compact('streamer', 'videos'));
     }
 
     /**

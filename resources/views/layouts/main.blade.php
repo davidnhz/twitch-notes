@@ -34,7 +34,11 @@
                                 <img src="{{ Auth::user()->avatar }}" width="30" />
                             </a>
                         </p>
-                        <p class="level-item">{{ Auth::user()->username }}</p>
+                        <p class="level-item">
+                            <a href="https://www.twitch.tv/{{ Auth::user()->username }}" target="_blank">
+                                {{ Auth::user()->username }}
+                            </a>
+                        </p>
                     @endauth
 
 
