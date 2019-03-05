@@ -23,15 +23,6 @@ class StreamersController extends Controller
     {
         $streamers = auth()->user()->streamers;
 
-        $client = new \GuzzleHttp\Client();
-        // dd(env('TWITCH_KEY'));
-        $request = $client->request('GET', 'https://api.twitch.tv/helix/videos', [
-            'headers' => ['Client-ID' => env('TWITCH_KEY')],
-            'query' => ['id' => '388692160'],
-        ]);
-        // dd(json_decode($request->getBody()->getContents()));
-        // dd($response = $request->getBody()->getContents());
-
         return view('streamers.index', compact('streamers'));
     }
 
@@ -102,29 +93,6 @@ class StreamersController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -143,8 +111,8 @@ class StreamersController extends Controller
     {
         /*
         TODO:
-            Check is a valid username on twitch.l
-            Check if the streamer is already stored for the user.
+            Check is a valid username on twitch.
+            Check if the streamer is already stored for current user.
         */
 
         return request()->validate([
