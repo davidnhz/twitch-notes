@@ -27,7 +27,7 @@
         </div>
         <div class="section">
             <div class="container">
-                @if($streamers)
+                @if($streamers->count())
                     <h4>My favorite streamers</h4>
                     <div class="columns">
                         <div class="column is-half">

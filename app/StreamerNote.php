@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 
-class Streamer extends Model
+class StreamerNote extends Model
 {
     protected $guarded = [];
 
@@ -18,13 +18,8 @@ class Streamer extends Model
         });
     }
 
-    public function notes()
+    public function streamer()
     {
-        return $this->hasMany(StreamerNote::class);
-    }
-
-    public function addNote($attributes)
-    {
-        return $this->notes()->create($attributes);
+        return $this->blongsTo(Streamer::class);
     }
 }

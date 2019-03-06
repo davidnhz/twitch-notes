@@ -8,13 +8,14 @@ use App\Streamer;
 
 class StreamersController extends Controller
 {
-    protected $client;
+    protected $client, $headers;
 
     public function __construct()
     {
         $this->middleware('auth');
 
-        $this->client = $client = new \GuzzleHttp\Client();
+        $this->client = new \GuzzleHttp\Client();
+        $this->headers = ['Client-ID' => env('TWITCH_KEY')];
     }
 
     /**
@@ -41,7 +42,7 @@ class StreamersController extends Controller
         $attributes['user_id'] = auth()->id();
 
         $request = $this->client->request('GET', 'https://api.twitch.tv/helix/users', [
-            'headers' => ['Client-ID' => env('TWITCH_KEY')],
+            'headers' => $this->headers,
             'query' => ['login' => $attributes['nickname']],
         ]);
 
@@ -68,7 +69,7 @@ class StreamersController extends Controller
         $videos = [];
 
         $request = $this->client->request('GET', 'https://api.twitch.tv/helix/videos', [
-            'headers' => ['Client-ID' => env('TWITCH_KEY')],
+            'headers' => $this->headers,
             'query' => [
                 'user_id' => $streamer->twitch_id,
                 'first' => 10,

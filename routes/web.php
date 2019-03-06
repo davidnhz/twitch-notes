@@ -21,3 +21,5 @@ Route::get('login', [ 'as' => 'login', 'uses' => 'SocialAuthController@redirect'
 Route::get('logout', 'SocialAuthController@logout');
 
 Route::resource('streamers', 'StreamersController');
+
+Route::post('/streamers/{streamer}/notes', 'StreamerNotesController@store');
