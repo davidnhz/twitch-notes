@@ -64,7 +64,7 @@ class StreamersController extends Controller
      */
     public function show(Streamer $streamer)
     {
-        abort_if($streamer->user_id !== auth()->id(), 403);
+        $this->authorize('owns', $streamer);
 
         $videos = [];
 
@@ -97,7 +97,7 @@ class StreamersController extends Controller
      */
     public function destroy(Streamer $streamer)
     {
-        abort_if($streamer->user_id !== auth()->id(), 403);
+        $this->authorize('owns', $streamer);
 
         $streamer->delete();
 
