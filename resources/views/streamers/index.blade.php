@@ -52,6 +52,14 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <div class="block">
+                                                        <a href="/streamers/{{ $streamer->id }}">
+                                                            <span class="tag is-warning">
+                                                                {{ $streamer->notes()->count() }}
+                                                                <span class="icon">
+                                                                    <i class="fas fa-comment-alt"></i>
+                                                                </span>
+                                                            </span>
+                                                        </a>
                                                         <span class="tag is-danger">
                                                             Delete
                                                             <button class="delete" type="submit">Delete Project</button>
