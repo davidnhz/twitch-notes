@@ -47,7 +47,7 @@ class StreamersController extends Controller
             return redirect()->back()->withErrors($errors);
         }
 
-        $request = $this->client->request('GET', 'https://api.twitch.tv/helix/users', [
+        $request = $this->client->request('GET', env('TWITCH_API_URI') . 'users', [
             'headers' => $this->headers,
             'query' => ['login' => $attributes['nickname']],
         ]);
@@ -74,7 +74,7 @@ class StreamersController extends Controller
 
         $videos = [];
 
-        $request = $this->client->request('GET', 'https://api.twitch.tv/helix/videos', [
+        $request = $this->client->request('GET', env('TWITCH_API_URI') . 'videos', [
             'headers' => $this->headers,
             'query' => [
                 'user_id' => $streamer->twitch_id,
@@ -139,7 +139,7 @@ class StreamersController extends Controller
             return ['User already stored'];
         }
 
-        $request = $this->client->request('GET', 'https://api.twitch.tv/helix/users', [
+        $request = $this->client->request('GET', env('TWITCH_API_URI') . 'users', [
             'headers' => $this->headers,
             'query' => [
                 'login' => $attributes['nickname'],

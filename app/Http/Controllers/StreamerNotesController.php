@@ -43,7 +43,7 @@ class StreamerNotesController extends Controller
 
     public function getStream(Streamer $streamer)
     {
-        $request = $this->client->request('GET', 'https://api.twitch.tv/helix/streams', [
+        $request = $this->client->request('GET', env('TWITCH_API_URI') . 'streams', [
             'headers' => $this->headers,
             'query' => ['user_id' => $streamer->twitch_id],
         ]);
@@ -63,7 +63,7 @@ class StreamerNotesController extends Controller
 
     public function getGameName($game_id)
     {
-        $request = $this->client->request('GET', 'https://api.twitch.tv/helix/games', [
+        $request = $this->client->request('GET', env('TWITCH_API_URI') . 'games', [
             'headers' => $this->headers,
             'query' => ['id' => $game_id],
         ]);
