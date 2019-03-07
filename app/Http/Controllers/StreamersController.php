@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 use App\Streamer;
 
@@ -40,6 +41,11 @@ class StreamersController extends Controller
     {
         $attributes = $this->validateStreamer();
         $attributes['user_id'] = auth()->id();
+
+        if ($errors = $this->checkIfValid($attributes))
+        {
+            return redirect()->back()->withErrors($errors);
+        }
 
         $request = $this->client->request('GET', 'https://api.twitch.tv/helix/users', [
             'headers' => $this->headers,
@@ -111,9 +117,45 @@ class StreamersController extends Controller
             Check is a valid username on twitch.
             Check if the streamer is already stored for current user.
         */
-
         return request()->validate([
             'nickname' => ['required', 'min:3'],
         ]);
+    }
+
+     /**
+     * Check if streamer already stored and if streamer is valis twitch user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    protected function checkIfValid($attributes)
+    {
+        $streamer = Streamer::where('user_id', $attributes['user_id'])
+          ->where('nickname', $attributes['nickname'])
+          ->get()
+          ->first();
+
+        if($streamer) {
+            return ['User already stored'];
+        }
+
+        $request = $this->client->request('GET', 'https://api.twitch.tv/helix/users', [
+            'headers' => $this->headers,
+            'query' => [
+                'login' => $attributes['nickname'],
+            ],
+        ]);
+
+        if ($request->getStatusCode() === 200) {
+            $response = json_decode($request->getBody()->getContents());
+            $twitch_user = $response->data;
+
+            if (!$twitch_user)
+            {
+                return ['Invalid twitch user'];
+            }
+        }
+
+        return [];
     }
 }
