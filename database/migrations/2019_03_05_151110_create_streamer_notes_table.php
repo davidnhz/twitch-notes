@@ -22,7 +22,7 @@ class CreateStreamerNotesTable extends Migration
             $table->string('thumbnail')->nullable();
             $table->timestamps();
 
-            $table->foreign('streamer_id')->references('id')->on('streamers');
+            $table->foreign('streamer_id')->references('id')->on('streamers')->onDelete('cascade');
         });
     }
 
