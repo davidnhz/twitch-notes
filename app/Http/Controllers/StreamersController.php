@@ -6,17 +6,14 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 
 use App\Streamer;
+use App\Helpers\TwitchClient;
 
 class StreamersController extends Controller
 {
-    protected $client, $headers;
 
     public function __construct()
     {
         $this->middleware('auth');
-
-        $this->client = new \GuzzleHttp\Client();
-        $this->headers = ['Client-ID' => env('TWITCH_KEY')];
     }
 
     /**
@@ -27,6 +24,11 @@ class StreamersController extends Controller
     public function index()
     {
         $streamers = auth()->user()->streamers;
+
+        foreach ($streamers as $streamer) {
+            $stream = $this->getStream($streamer);
+            $streamer->stream = $stream ? $stream->type : '';
+        }
 
         return view('streamers.index', compact('streamers'));
     }
@@ -47,14 +49,13 @@ class StreamersController extends Controller
             return redirect()->back()->withErrors($errors);
         }
 
-        $request = $this->client->request('GET', env('TWITCH_API_URI') . 'users', [
-            'headers' => $this->headers,
-            'query' => ['login' => $attributes['nickname']],
-        ]);
+        $response_data = TwitchClient::instance()->clientRequest([
+            'login' => $attributes['nickname'],
+        ], 'users');
 
-        if ($request->getStatusCode() === 200) {
-            $response = json_decode($request->getBody()->getContents());
-            $attributes['twitch_id'] = $response->data[0]->id;
+        if ($response_data)
+        {
+            $attributes['twitch_id'] = $response_data[0]->id;
 
             $streamer = Streamer::create($attributes);
         }
@@ -74,18 +75,13 @@ class StreamersController extends Controller
 
         $videos = [];
 
-        $request = $this->client->request('GET', env('TWITCH_API_URI') . 'videos', [
-            'headers' => $this->headers,
-            'query' => [
-                'user_id' => $streamer->twitch_id,
-                'first' => 10,
-            ],
-        ]);
+        $videos = TwitchClient::instance()->clientRequest([
+            'user_id' => $streamer->twitch_id,
+            'first' => 10,
+        ], 'videos');
 
-        if ($request->getStatusCode() === 200) {
-            $response = json_decode($request->getBody()->getContents());
-            $videos = $response->data;
-
+        if ($videos)
+        {
             $videos = array_map(function($video){
                 $video->thumbnail_url = str_replace_first('%{height}','60', str_replace_first('%{width}', '100', $video->thumbnail_url));
                 return $video;
@@ -112,11 +108,6 @@ class StreamersController extends Controller
 
     protected function validateStreamer()
     {
-        /*
-        TODO:
-            Check is a valid username on twitch.
-            Check if the streamer is already stored for current user.
-        */
         return request()->validate([
             'nickname' => ['required', 'min:3'],
         ]);
@@ -131,31 +122,38 @@ class StreamersController extends Controller
     protected function checkIfValid($attributes)
     {
         $streamer = Streamer::where('user_id', $attributes['user_id'])
-          ->where('nickname', $attributes['nickname'])
-          ->get()
-          ->first();
+            ->where('nickname', $attributes['nickname'])
+            ->get()
+            ->first();
 
         if($streamer) {
             return ['User already stored'];
         }
 
-        $request = $this->client->request('GET', env('TWITCH_API_URI') . 'users', [
-            'headers' => $this->headers,
-            'query' => [
-                'login' => $attributes['nickname'],
-            ],
-        ]);
+        $response_data = TwitchClient::instance()->clientRequest([
+            'login' => $attributes['nickname'],
+        ], 'users');
 
-        if ($request->getStatusCode() === 200) {
-            $response = json_decode($request->getBody()->getContents());
-            $twitch_user = $response->data;
-
-            if (!$twitch_user)
-            {
-                return ['Invalid twitch user'];
-            }
+        if (!$response_data)
+        {
+            return ['Invalid twitch user'];
         }
 
         return [];
     }
+
+    public function getStream(Streamer $streamer)
+    {
+        $response_data = TwitchClient::instance()->clientRequest([
+            'user_id' => $streamer->twitch_id
+        ], 'streams');
+
+        if ($response_data)
+        {
+            return $response_data[0];
+        }
+
+        return [];
+    }
+
 }

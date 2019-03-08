@@ -6,17 +6,14 @@ use Illuminate\Http\Request;
 
 use App\Streamer;
 use App\StreamerNote;
+use App\Helpers\TwitchClient;
 
 class StreamerNotesController extends Controller
 {
-    protected $client, $headers;
 
     public function __construct()
     {
         $this->middleware('auth');
-
-        $this->client = new \GuzzleHttp\Client();
-        $this->headers = ['Client-ID' => env('TWITCH_KEY')];
     }
 
     public function store(Streamer $streamer)
@@ -43,19 +40,13 @@ class StreamerNotesController extends Controller
 
     public function getStream(Streamer $streamer)
     {
-        $request = $this->client->request('GET', env('TWITCH_API_URI') . 'streams', [
-            'headers' => $this->headers,
-            'query' => ['user_id' => $streamer->twitch_id],
-        ]);
+        $response_data = TwitchClient::instance()->clientRequest([
+            'user_id' => $streamer->twitch_id
+        ], 'streams');
 
-        if ($request->getStatusCode() === 200)
+        if ($response_data)
         {
-            $response = json_decode($request->getBody()->getContents());
-
-            if ($response->data)
-            {
-                return $response->data[0];
-            }
+            return $response_data[0];
         }
 
         return [];
@@ -63,18 +54,13 @@ class StreamerNotesController extends Controller
 
     public function getGameName($game_id)
     {
-        $request = $this->client->request('GET', env('TWITCH_API_URI') . 'games', [
-            'headers' => $this->headers,
-            'query' => ['id' => $game_id],
-        ]);
+        $response_data = TwitchClient::instance()->clientRequest([
+            'id' => $game_id
+        ], 'games');
 
-        if ($request->getStatusCode() === 200)
+        if ($response_data)
         {
-            $response = json_decode($request->getBody()->getContents());
-            if ($response->data)
-            {
-                return $response->data[0]->name;
-            }
+            return $response_data[0]->name;
         }
 
         return 'Offline';

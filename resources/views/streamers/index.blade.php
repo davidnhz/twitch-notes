@@ -19,7 +19,7 @@
                     @csrf
 
                     <div class="field">
-                        <label class="label">Name</label>
+                        <label class="label">Nickname</label>
                         <div class="control">
                             <input class="input" type="text" name="nickname" placeholder="Stramer nickname">
                         </div>
@@ -45,7 +45,17 @@
                                     @foreach($streamers as $streamer)
                                         <tr>
                                             <td>
-                                                <a href="/streamers/{{ $streamer->id }}">{{ $streamer->nickname }}</a>
+                                                <a href="/streamers/{{ $streamer->id }}">
+                                                    {{ $streamer->nickname }}
+                                                    @if ($streamer->stream)
+                                                        <span class="tag is-success">
+                                                            {{ $streamer->stream }}
+                                                            <span class="icon">
+                                                                <i class="fas fa-video"></i>
+                                                            </span>
+                                                        </span>
+                                                    @endif
+                                                </a>
                                             </td>
                                             <td>
                                                 <form action="/streamers/{{ $streamer->id }}" method="POST">
