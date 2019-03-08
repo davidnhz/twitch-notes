@@ -22,7 +22,6 @@ class StreamerNotesController extends Controller
             'content' => ['required', 'min:3']
         ]);
 
-
         if ($stream = $this->getStream($streamer))
         {
             $attributes['stream_title'] = $stream->title;
