@@ -56,6 +56,7 @@ class StreamersController extends Controller
         if ($response_data)
         {
             $attributes['twitch_id'] = $response_data[0]->id;
+            $attributes['avatar'] = $response_data[0]->profile_image_url;
 
             $streamer = Streamer::create($attributes);
         }

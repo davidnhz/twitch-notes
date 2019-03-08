@@ -17,6 +17,7 @@ class CreateStreamersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('nickname');
+            $table->string('avatar');
             $table->unsignedBigInteger('twitch_id');
             $table->timestamps();
 

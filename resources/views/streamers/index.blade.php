@@ -45,6 +45,9 @@
                                     @foreach($streamers as $streamer)
                                         <tr>
                                             <td>
+                                                <img src="{{ $streamer->avatar }}" alt="{{ $streamer->nickname }}" width="30">
+                                            </td>
+                                            <td>
                                                 <a href="/streamers/{{ $streamer->id }}">
                                                     {{ $streamer->nickname }}
                                                     @if ($streamer->stream)
