@@ -64,7 +64,7 @@
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
             "@php artisan optimize",
             "@php artisan migrate --force",
-            "npm install"
+            "@composer npm-install"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
