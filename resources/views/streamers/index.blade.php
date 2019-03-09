@@ -32,6 +32,9 @@
                     </div>
 
                 </form>
+                <div id="app">
+                    <example-component></example-component>
+                </div>
             </div>
         </div>
         <div class="section">
