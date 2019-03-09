@@ -25,7 +25,7 @@
             <nav class="level">
                 <div class="level-left">
                 <div class="level-item">
-                    <img src="{{ url('images/twitch.png') }}" width="50" alt="">
+                    <img src="{{ asset('images/twitch.png') }}" width="50" alt="">
                     <p class="subtitle is-5">Twitch Notes</p>
                 </div>
 

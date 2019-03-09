@@ -35,7 +35,7 @@
                                 @if ($note->thumbnail)
                                     <div class="card-image">
                                         <figure class="image is-4by3">
-                                        <img src="{{ $note->thumbnail }}" alt="">
+                                        <img src="{{ Storage::url($note->thumbnail) }}" alt="">
                                         </figure>
                                     </div>
                                 @endif
