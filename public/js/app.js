@@ -1859,7 +1859,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['note', 'streamer'],
+  props: ['note'],
   data: function data() {
     return {
       editMode: false
@@ -1869,7 +1869,7 @@ __webpack_require__.r(__webpack_exports__);
     onClickDelete: function onClickDelete() {
       var _this = this;
 
-      axios.delete("/streamers/".concat(this.streamer, "/notes/").concat(this.note.id)).then(function () {
+      axios.delete("/streamers/".concat(this.note.streamer_id, "/notes/").concat(this.note.id)).then(function () {
         _this.$emit('delete');
       });
     },
@@ -1882,7 +1882,7 @@ __webpack_require__.r(__webpack_exports__);
       var params = {
         content: this.note.content
       };
-      axios.patch("/streamers/".concat(this.streamer, "/notes/").concat(this.note.id), params).then(function (response) {
+      axios.patch("/streamers/".concat(this.note.streamer_id, "/notes/").concat(this.note.id), params).then(function (response) {
         _this2.editMode = false;
         var note = response.data;
 
@@ -1918,7 +1918,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1929,9 +1928,15 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get("/streamers/".concat(this.streamer, "/notes")).then(function (response) {
-      _this.notes = response.data;
-    });
+    if (this.streamer != 0) {
+      axios.get("/streamers/".concat(this.streamer, "/notes")).then(function (response) {
+        _this.notes = response.data;
+      });
+    } else {
+      axios.get("/notes").then(function (response) {
+        _this.notes = response.data;
+      });
+    }
   },
   methods: {
     addNote: function addNote(note) {
@@ -37097,7 +37102,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("p", { staticClass: "subtitle is-6" }, [
-                _vm._v("Game: " + _vm._s(_vm.note.game_name))
+                _c("b", [_vm._v("Game: " + _vm._s(_vm.note.game_name))])
               ])
             ])
           ]),
@@ -37226,10 +37231,12 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("form-component", {
-        attrs: { streamer: _vm.streamer },
-        on: { new: _vm.addNote }
-      }),
+      _vm.streamer != 0
+        ? _c("form-component", {
+            attrs: { streamer: _vm.streamer },
+            on: { new: _vm.addNote }
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "div",
@@ -37237,7 +37244,7 @@ var render = function() {
         _vm._l(_vm.notes, function(note, index) {
           return _c("note-component", {
             key: note.id,
-            attrs: { note: note, streamer: _vm.streamer },
+            attrs: { note: note },
             on: {
               update: function($event) {
                 var i = arguments.length,

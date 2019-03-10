@@ -13,7 +13,7 @@
                         </ul>
                     </div>
                 @endif
-                <h4>Add Streamer</h4>
+                <h4 class="title">Add Streamer</h4>
 
                 <form action="/streamers" method="POST">
                     @csrf
@@ -33,63 +33,66 @@
                 </form>
             </div>
         </div>
-        <div class="section">
-            <div class="container">
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="columns">
                 @if($streamers->count())
-                    <h4>My favorite streamers</h4>
-                    <div class="columns">
-                        <div class="column is-half">
-                            <table class="table is-bordered is-striped is-narrow is-hoverable">
-                                <tbody>
-                                    @foreach($streamers as $streamer)
-                                        <tr>
-                                            <td>
-                                                <img src="{{ $streamer->avatar }}" alt="{{ $streamer->nickname }}" width="30">
-                                            </td>
-                                            <td>
-                                                <a href="/streamers/{{ $streamer->id }}">
-                                                    {{ $streamer->nickname }}
-                                                    @if ($streamer->stream)
-                                                        <span class="tag is-success">
-                                                            {{ $streamer->stream }}
+                <div class="column is-half">
+                        <h4 class="title">My favorite streamers</h4>
+                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                            <tbody>
+                                @foreach($streamers as $streamer)
+                                    <tr>
+                                        <td>
+                                            <img src="{{ $streamer->avatar }}" alt="{{ $streamer->nickname }}" width="30">
+                                        </td>
+                                        <td>
+                                            <a href="/streamers/{{ $streamer->id }}">
+                                                {{ $streamer->nickname }}
+                                                @if ($streamer->stream)
+                                                    <span class="tag is-success">
+                                                        {{ $streamer->stream }}
+                                                        <span class="icon">
+                                                            <i class="fas fa-video"></i>
+                                                        </span>
+                                                    </span>
+                                                @endif
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <form action="/streamers/{{ $streamer->id }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <div class="block">
+                                                    <a href="/streamers/{{ $streamer->id }}">
+                                                        <span class="tag is-warning">
+                                                            {{ $streamer->notes()->count() }}
                                                             <span class="icon">
-                                                                <i class="fas fa-video"></i>
+                                                                <i class="fas fa-comment-alt"></i>
                                                             </span>
                                                         </span>
-                                                    @endif
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <form action="/streamers/{{ $streamer->id }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <div class="block">
-                                                        <a href="/streamers/{{ $streamer->id }}">
-                                                            <span class="tag is-warning">
-                                                                {{ $streamer->notes()->count() }}
-                                                                <span class="icon">
-                                                                    <i class="fas fa-comment-alt"></i>
-                                                                </span>
-                                                            </span>
-                                                        </a>
-                                                        <span class="tag is-danger">
-                                                            Delete
-                                                            <button class="delete" type="submit">Delete stream</button>
-                                                        </span>
-                                                    </div>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                      @endforeach
-                                </tbody>
-                            </table>
-
-                        </div>
+                                                    </a>
+                                                    <span class="tag is-danger">
+                                                        Delete
+                                                        <button class="delete" type="submit">Delete stream</button>
+                                                    </span>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                            </tbody>
+                        </table>
                     </div>
-
                 @endif
+                <div class="column is-half">
+                    <h4 class="title">Latests Notes</h4>
+                    <div id="app">
+                        <notes-component :streamer="0"></notes-component>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 @endsection

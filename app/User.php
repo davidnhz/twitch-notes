@@ -41,4 +41,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Streamer::class, 'user_id');
     }
+
+    public function notes()
+    {
+        return $this->hasManyThrough('App\StreamerNote', 'App\Streamer')->take(10);
+    }
 }

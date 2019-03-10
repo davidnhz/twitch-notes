@@ -64,6 +64,18 @@ class StreamerNotesController extends Controller
         return $notes;
     }
 
+    public function getAll()
+    {
+        $notes = auth()->user()->notes;
+
+        foreach ($notes as $note) {
+            $note->created = date('l jS \of F Y h:i:s A', strtotime($note->created_at));
+            $note->thumbnail = $note->thumbnail ? Storage::url( $note->thumbnail) : $note->thumbnail;
+        }
+
+        return $notes;
+    }
+
     public function destroy(Streamer $streamer, StreamerNote $note)
     {
         $this->authorize('owns', $streamer);

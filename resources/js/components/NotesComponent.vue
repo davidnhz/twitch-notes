@@ -1,12 +1,11 @@
 <template>
     <div>
-        <form-component @new="addNote" :streamer="streamer"></form-component>
+        <form-component v-if="streamer != 0" @new="addNote" :streamer="streamer"></form-component>
         <div class="section">
             <note-component
                 v-for="(note, index) in notes"
                 :key="note.id"
                 :note="note"
-                :streamer="streamer"
                 @update="updateNote(index, ...arguments)"
                 @delete="deleteNote(index)">
             </note-component>
@@ -23,10 +22,17 @@ export default {
     },
     props: ['streamer'],
     mounted() {
-        axios.get(`/streamers/${this.streamer}/notes`)
-            .then((response) => {
-                this.notes = response.data;
-            });
+        if (this.streamer != 0) {
+            axios.get(`/streamers/${this.streamer}/notes`)
+                .then((response) => {
+                    this.notes = response.data;
+                });
+        } else {
+            axios.get(`/notes`)
+                .then((response) => {
+                    this.notes = response.data;
+                });
+        }
 
     },
     methods: {

@@ -11,7 +11,7 @@
                     <div class="media">
                         <div class="media-content">
                             <p class="title is-6">{{ note.stream_title }}</p>
-                            <p class="subtitle is-6">Game: {{ note.game_name }}</p>
+                            <p class="subtitle is-6"><b>Game: {{ note.game_name }}</b></p>
                         </div>
                     </div>
 
@@ -39,7 +39,7 @@
 
 <script>
 export default {
-    props: ['note','streamer'],
+    props: ['note'],
     data() {
         return {
             editMode: false
@@ -47,7 +47,7 @@ export default {
     },
     methods: {
         onClickDelete() {
-            axios.delete(`/streamers/${this.streamer}/notes/${this.note.id}`).then(() => {
+            axios.delete(`/streamers/${this.note.streamer_id}/notes/${this.note.id}`).then(() => {
                 this.$emit('delete');
             });
         },
@@ -58,7 +58,7 @@ export default {
             const params = {
                 content: this.note.content
             };
-            axios.patch(`/streamers/${this.streamer}/notes/${this.note.id}`, params).then((response) => {
+            axios.patch(`/streamers/${this.note.streamer_id}/notes/${this.note.id}`, params).then((response) => {
                 this.editMode = false;
                 const note = response.data;
                 this.$emit('update', note);
