@@ -46,6 +46,7 @@ class StreamerNotesController extends Controller
 
         $note = $streamer->addNote($attributes);
         $note->thumbnail = $note->thumbnail ? Storage::url($note->thumbnail) : $note->thumbnail;
+        $note->created = date('l jS \of F Y h:i:s A', strtotime($note->created_at));
 
         return $note;
     }
@@ -56,11 +57,10 @@ class StreamerNotesController extends Controller
 
         $notes = $streamer->notes;
         foreach ($notes as $note) {
+            $note->created = date('l jS \of F Y h:i:s A', strtotime($note->created_at));
             $note->thumbnail = $note->thumbnail ? Storage::url( $note->thumbnail) : $note->thumbnail;
         }
-        // dd($notes);
 
-        // Storage::url($note->thumbnail)
         return $notes;
     }
 

@@ -24,13 +24,13 @@
                         </template>
                         <div v-else>{{ note.content }}</div>
                         <br>
-                        <time :datetime="note.created_at">{{ note.created_at }}</time>
+                        <time :datetime="note.created" class="is-size-7">{{ note.created }}</time>
                     </div>
                 </div>
                 <footer class="card-footer">
                     <a v-if="editMode" href="#" class="card-footer-item" v-on:click.prevent="onClickUpdate()">Save</a>
                     <a v-else href="#" class="card-footer-item" v-on:click.prevent="onClickEdit()" >Edit</a>
-                    <a href="#" class="card-footer-item" v-on:click.prevent="onClickDelete()">Delete</a>
+                    <a href="#" class="card-footer-item has-text-danger" v-on:click.prevent="onClickDelete()">Delete</a>
                 </footer>
             </div>
         </div>

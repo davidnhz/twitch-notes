@@ -37138,9 +37138,14 @@ var render = function() {
               _vm._v(" "),
               _c("br"),
               _vm._v(" "),
-              _c("time", { attrs: { datetime: _vm.note.created_at } }, [
-                _vm._v(_vm._s(_vm.note.created_at))
-              ])
+              _c(
+                "time",
+                {
+                  staticClass: "is-size-7",
+                  attrs: { datetime: _vm.note.created }
+                },
+                [_vm._v(_vm._s(_vm.note.created))]
+              )
             ],
             2
           )
@@ -37180,7 +37185,7 @@ var render = function() {
           _c(
             "a",
             {
-              staticClass: "card-footer-item",
+              staticClass: "card-footer-item has-text-danger",
               attrs: { href: "#" },
               on: {
                 click: function($event) {
