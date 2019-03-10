@@ -28,7 +28,7 @@
                 <div class="level-left">
                 <div class="level-item">
                     <img src="{{ asset('images/twitch.png') }}" width="50" alt="">
-                    <p class="subtitle is-5">Twitch Notes</p>
+                    <p class="subtitle is-5"><a href="{{ url('/') }}">Twitch Notes</a></p>
                 </div>
 
                 </div>

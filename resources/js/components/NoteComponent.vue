@@ -11,7 +11,7 @@
                     <div class="media">
                         <div class="media-content">
                             <p class="title is-6">{{ note.stream_title }}</p>
-                            <p class="subtitle is-6">{{ note.game_name }}</p>
+                            <p class="subtitle is-6">Game: {{ note.game_name }}</p>
                         </div>
                     </div>
 

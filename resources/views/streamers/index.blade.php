@@ -74,7 +74,7 @@
                                                         </a>
                                                         <span class="tag is-danger">
                                                             Delete
-                                                            <button class="delete" type="submit">Delete Project</button>
+                                                            <button class="delete" type="submit">Delete stream</button>
                                                         </span>
                                                     </div>
                                                 </form>

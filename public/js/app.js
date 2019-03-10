@@ -37097,7 +37097,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("p", { staticClass: "subtitle is-6" }, [
-                _vm._v(_vm._s(_vm.note.game_name))
+                _vm._v("Game: " + _vm._s(_vm.note.game_name))
               ])
             ])
           ]),
