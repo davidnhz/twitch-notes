@@ -11,7 +11,7 @@
                     <div class="media">
                         <div class="media-content">
                             <p class="title is-6">{{ note.stream_title }}</p>
-                            <p class="subtitle is-6"><b>Game: {{ note.game_name }}</b></p>
+                            <p v-if="note.game_name != 'Offline'" class="subtitle is-6"><b>Game: {{ note.game_name }}</b></p>
                         </div>
                     </div>
 

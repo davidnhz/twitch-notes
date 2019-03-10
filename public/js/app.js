@@ -37101,9 +37101,11 @@ var render = function() {
                 _vm._v(_vm._s(_vm.note.stream_title))
               ]),
               _vm._v(" "),
-              _c("p", { staticClass: "subtitle is-6" }, [
-                _c("b", [_vm._v("Game: " + _vm._s(_vm.note.game_name))])
-              ])
+              _vm.note.game_name != "Offline"
+                ? _c("p", { staticClass: "subtitle is-6" }, [
+                    _c("b", [_vm._v("Game: " + _vm._s(_vm.note.game_name))])
+                  ])
+                : _vm._e()
             ])
           ]),
           _vm._v(" "),
