@@ -2,6 +2,12 @@
 @extends('layouts.main')
 
 @section('content')
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="{{ url('/streamers') }}">Streamers</a></li>
+            <li class="is-active"><a href="https://www.twitch.tv/{{ $streamer->nickname }}" target="_blank" aria-current="page">{{ $streamer->nickname }}</a></li>
+        </ul>
+    </nav>
     <div class="content">
         <a href="https://www.twitch.tv/{{ $streamer->nickname }}" target="_blank">
             <h1>{{ $streamer->nickname }}</h1>
