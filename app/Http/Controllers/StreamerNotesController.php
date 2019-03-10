@@ -37,8 +37,7 @@ class StreamerNotesController extends Controller
             // Use note_id to name stream screenshot to make it unique
             $name = ($last_note ? $last_note->id + 1 : 1) . '-' . substr($stream_thumbnail, strrpos($stream_thumbnail, '/') + 1);
             $storage = Storage::put($name, $contents);
-            dump($contents);
-            dd($storage);
+
             $attributes['thumbnail'] = $name;
         } else {
             $attributes['game_name'] = 'Offline';
