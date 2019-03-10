@@ -30,11 +30,7 @@
                             <button class="button is-link" type="submit">Add Streamer</button>
                         </div>
                     </div>
-
                 </form>
-                <div id="app">
-                    <example-component></example-component>
-                </div>
             </div>
         </div>
         <div class="section">

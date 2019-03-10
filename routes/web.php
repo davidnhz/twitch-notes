@@ -23,3 +23,6 @@ Route::get('logout', 'SocialAuthController@logout');
 Route::resource('streamers', 'StreamersController');
 
 Route::post('/streamers/{streamer}/notes', 'StreamerNotesController@store');
+Route::get('/streamers/{streamer}/notes', 'StreamerNotesController@get');
+Route::delete('/streamers/{streamer}/notes/{note}', 'StreamerNotesController@destroy');
+Route::patch('/streamers/{streamer}/notes/{note}', 'StreamerNotesController@update');

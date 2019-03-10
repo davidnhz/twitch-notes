@@ -44,9 +44,44 @@ class StreamerNotesController extends Controller
             $attributes['stream_title'] = 'Offline';
         }
 
-        $streamer->addNote($attributes);
+        $note = $streamer->addNote($attributes);
+        $note->thumbnail = $note->thumbnail ? Storage::url($note->thumbnail) : $note->thumbnail;
 
-        return back();
+        return $note;
+    }
+
+    public function get(Streamer $streamer)
+    {
+        $this->authorize('owns', $streamer);
+
+        $notes = $streamer->notes;
+        foreach ($notes as $note) {
+            $note->thumbnail = $note->thumbnail ? Storage::url( $note->thumbnail) : $note->thumbnail;
+        }
+        // dd($notes);
+
+        // Storage::url($note->thumbnail)
+        return $notes;
+    }
+
+    public function destroy(Streamer $streamer, StreamerNote $note)
+    {
+        $this->authorize('owns', $streamer);
+
+        $note->delete();
+    }
+
+    public function update(Streamer $streamer, StreamerNote $note)
+    {
+        $this->authorize('owns', $streamer);
+
+        $attributes = request()->validate([
+            'content' => ['required', 'min:3']
+        ]);
+
+        $note->update($attributes);
+
+        return $note;
     }
 
     public function getStream(Streamer $streamer)
