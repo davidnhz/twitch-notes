@@ -1,8 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    <div class="content">
-        <div class="section">
+        <div class="content">
             <div class="container">
                 @if ($errors->any())
                     <div class="notification is-danger">
@@ -21,7 +20,7 @@
                     <div class="field">
                         <label class="label">Nickname</label>
                         <div class="control">
-                            <input class="input" type="text" name="nickname" placeholder="Stramer nickname">
+                            <input class="input" type="text" name="nickname" placeholder="Streamer nickname">
                         </div>
                     </div>
 
@@ -33,7 +32,6 @@
                 </form>
             </div>
         </div>
-    </div>
     <div class="section">
         <div class="container">
             <div class="columns">
