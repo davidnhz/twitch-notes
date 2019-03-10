@@ -21,7 +21,7 @@ class StreamerNotesController extends Controller
     public function store(Streamer $streamer)
     {
         $attributes = request()->validate([
-            'content' => ['required', 'min:3']
+            'content' => ['required', 'min:1']
         ]);
 
         if ($stream = $this->getStream($streamer))
@@ -76,10 +76,13 @@ class StreamerNotesController extends Controller
         $this->authorize('owns', $streamer);
 
         $attributes = request()->validate([
-            'content' => ['required', 'min:3']
+            'content' => ['required', 'min:1']
         ]);
 
         $note->update($attributes);
+
+        $note->created = date('l jS \of F Y h:i:s A', strtotime($note->created_at));
+        $note->thumbnail = $note->thumbnail ? Storage::url( $note->thumbnail) : $note->thumbnail;
 
         return $note;
     }
