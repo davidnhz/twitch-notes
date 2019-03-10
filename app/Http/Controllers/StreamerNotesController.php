@@ -41,7 +41,7 @@ class StreamerNotesController extends Controller
             $attributes['thumbnail'] = $name;
         } else {
             $attributes['game_name'] = 'Offline';
-            $attributes['stream_title'] = 'Offline';
+            $attributes['stream_title'] = $streamer->nickname;
         }
 
         $note = $streamer->addNote($attributes);
