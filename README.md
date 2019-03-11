@@ -1,4 +1,5 @@
 # Twitch Notes
+![Application running](http://glacial-coast-30412.herokuapp.com/images/twitch.png)
 
 ## Project deployed
 [Twitch notes deployed on heroku](http://glacial-coast-30412.herokuapp.com)
