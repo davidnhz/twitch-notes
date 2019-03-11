@@ -5,6 +5,7 @@
 
 ## Project tech stack
 Laravel 5.8
+
 Vue.js 2.6.8
 
 ## Project motivations
@@ -32,7 +33,7 @@ Watch stored videos with notes popping up at the time it was created during stre
 Share notes with friends: this feature requires more social network functionality such as connect users.
 
 ## To run the project
-Make sure you have installed `composer`, `npm` and ‘NodeJS’, also a database server running like mysql.
+Make sure you have installed `composer`, `npm` and `Node.js`, also a database server running like `MySQL`.
 
 ```
 # Install Laravel dependencies
