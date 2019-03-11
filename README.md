@@ -27,8 +27,10 @@ The application requires that user has a Twitch account to login it, once logged
 
 If you click the streamer’s nickname you are going to be redirected to the single page for the streamer, where the live stream and chat is going to be displayed, below you are going to see notes created for the streamer and on the right side the 10 latest videos stored representing the latest events streamed of the streamers.
 
-The notes management was made with Vue.js, since this frontend framework allows to interact withe the application without reloading the page, so the live stream isn’t interrupted.
+The notes management was made with Vue.js because this frontend framework allows interaction with the application without reloading the page, so the live stream isn’t reloaded and interrupted.
 
+
+### Screenshot of the aaplication dashboard
 ![Application running](http://glacial-coast-30412.herokuapp.com/images/twitch-notes-ss.png)
 
 ### Limitations
