@@ -5,9 +5,13 @@
 [Twitch notes deployed on heroku](http://glacial-coast-30412.herokuapp.com)
 
 ## Project tech stack
-`Laravel 5.8`
+`Laravel 5.8` for backend.
 
-`Vue.js 2.6.8`
+`Vue.js 2.6.8` for notes management components.
+
+`PostgreSQL 11` as database.
+
+`AWS S3` for images storage.
 
 ## Project motivations
 This application was designed as proof of concept to explore the integration of Laravel and Twitch API. The application pretends to fulfill some users needs, since there are a lot of tools for streamers but not enough for content consumers.
@@ -17,9 +21,9 @@ Twitcher Notes is an application where you can create personal notes during live
 
 Currently Twitch allows streamers to create markers so they can highlight moments during live streaming, so this application intends to allow the consumers do the same.
 
-The goal is to display created notes on stored videos, so you can see each note appears during the exact time where you created it during live stream. Twitch API has some limitations making hard to achieve this goal. One limitation found was that there is no way to link the current live stream with the stored video that is going to be created for the stream, one workaround to this limitation is to assume that latest video created is the video for the stream, but this is only going to work if streamer has activated the storing streams feature.
+The goal is to display created notes on stored videos, so you can see each note appears during the exact time where you created it during live stream. Twitch API has some limitations making hard to achieve this goal. 
 
-The applications requires that user has a Twitch account to login it, once logged you are going to see a form where you can add a streamer nickname, once added it’s going to be displayed on a streamers table, on the left side you can see the avatar and nickname of the streamer, if the streamer is live streaming right now you are going to see a green icon with a camera; on the right side you are going to see a yellow icon with the number of notes created, and finally a button to delete the streamer. On the right side of the page, you are going to see the 10 latest notes created if any.
+The application requires that user has a Twitch account to login it, once logged you are going to see a form where you can add a streamer nickname, once added it’s going to be displayed on a streamers table, on the left side you can see the avatar and nickname of the streamer, if the streamer is live streaming right now you are going to see a green icon with a camera; on the right side you are going to see a yellow icon with the number of notes created, and finally a button to delete the streamer. On the right side of the page, you are going to see the 10 latest notes created if any.
 
 If you click the streamer’s nickname you are going to be redirected to the single page for the streamer, where the live stream and chat is going to be displayed, below you are going to see notes created for the streamer and on the right side the 10 latest videos stored representing the latest events streamed of the streamers.
 
@@ -27,14 +31,20 @@ The notes management was made with Vue.js, since this frontend framework allows 
 
 ![Application running](http://glacial-coast-30412.herokuapp.com/images/twitch-notes-ss.png)
 
+### Limitations
+There is no way to link the current live stream with the stored video that is going to be created for the stream, one workaround to this limitation is to assume that latest video created is the video for the stream, but this is only going to work if streamer has activated the storing streams feature.
+
+The Screenshot retrieved from the stream when a note is created isn't taken at the current time, it is cached like 10 minutes so the image of the note doesn't really represents the moment when the note was created.
+
 ## Next steps
-Link note with stored video.
-Create marker before adding text to the note, so the time of creation will be more accurate.
-Watch stored videos with notes popping up at the time it was created during stream.
-Share notes with friends: this feature requires more social network functionality such as connect users.
+* Link note with stored video.
+* Add notes to past events.
+* Create marker before adding text to the note, so the time of creation will be more accurate.
+* Watch stored videos with notes popping up at the time it was created during stream.
+* Share notes with friends: this feature requires more social network functionalities such as connect users.
 
 ## To run the project
-Make sure you have installed `composer`, `npm` and `Node.js`, also a database server running like `MySQL`.
+Make sure you have installed `composer`, `npm` and `Node.js`, also a database server running like `PostgreSQL` or `MySQL`.
 
 ```
 # Install Laravel dependencies

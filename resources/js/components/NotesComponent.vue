@@ -34,7 +34,7 @@ export default {
 
     },
     methods: {
-        addNote(note){
+        addNote(note) {
             this.notes.unshift(note);
         },
         deleteNote(index) {
