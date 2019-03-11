@@ -1916,8 +1916,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -37240,30 +37238,25 @@ var render = function() {
           })
         : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "section" },
-        _vm._l(_vm.notes, function(note, index) {
-          return _c("note-component", {
-            key: note.id,
-            attrs: { note: note },
-            on: {
-              update: function($event) {
-                var i = arguments.length,
-                  argsArray = Array(i)
-                while (i--) argsArray[i] = arguments[i]
-                return _vm.updateNote.apply(void 0, [index].concat(argsArray))
-              },
-              delete: function($event) {
-                return _vm.deleteNote(index)
-              }
+      _vm._l(_vm.notes, function(note, index) {
+        return _c("note-component", {
+          key: note.id,
+          attrs: { note: note },
+          on: {
+            update: function($event) {
+              var i = arguments.length,
+                argsArray = Array(i)
+              while (i--) argsArray[i] = arguments[i]
+              return _vm.updateNote.apply(void 0, [index].concat(argsArray))
+            },
+            delete: function($event) {
+              return _vm.deleteNote(index)
             }
-          })
-        }),
-        1
-      )
+          }
+        })
+      })
     ],
-    1
+    2
   )
 }
 var staticRenderFns = []

@@ -1,15 +1,13 @@
 <template>
     <div>
         <form-component v-if="streamer != 0" @new="addNote" :streamer="streamer"></form-component>
-        <div class="section">
-            <note-component
-                v-for="(note, index) in notes"
-                :key="note.id"
-                :note="note"
-                @update="updateNote(index, ...arguments)"
-                @delete="deleteNote(index)">
-            </note-component>
-        </div>
+        <note-component
+            v-for="(note, index) in notes"
+            :key="note.id"
+            :note="note"
+            @update="updateNote(index, ...arguments)"
+            @delete="deleteNote(index)">
+        </note-component>
     </div>
 </template>
 
