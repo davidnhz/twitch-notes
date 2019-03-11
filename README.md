@@ -5,12 +5,12 @@
 [Twitch notes deployed on heroku](http://glacial-coast-30412.herokuapp.com)
 
 ## Project tech stack
-Laravel 5.8
+`Laravel 5.8`
 
-Vue.js 2.6.8
+`Vue.js 2.6.8`
 
 ## Project motivations
-To explore the integration of Laravel and Twitch API, an application was designed and developed to work as proof of concept. The idea was designed to fulfill users needs, since there are a lot of tools for streamers but not enough for consumers.
+This application was designed as proof of concept to explore the integration of Laravel and Twitch API. The idea was designed to fulfill users needs, since there are a lot of tools for streamers but not enough for consumers.
 
 ## Project description
 Twitcher Notes is an application where you can create personal notes during live streams of your favorite streamers. You just have to add the nickname of your favorites streamers and then you are going to be able to add notes while you are watching the live stream. You can revisit your ideas and comments created during streams for education, analysis or entertainment purposes.
