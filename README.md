@@ -1,7 +1,8 @@
 # Twitch Notes
-![Application running](http://glacial-coast-30412.herokuapp.com/images/laravel.png | width=100)
-![Application running](http://glacial-coast-30412.herokuapp.com/images/vue.png | width=100)
-![Application running](http://glacial-coast-30412.herokuapp.com/images/twitch.png | width=100)
+![](http://glacial-coast-30412.herokuapp.com/images/laravel.png | width=100)
+![](http://glacial-coast-30412.herokuapp.com/images/vue.png | width=100)
+
+![](http://glacial-coast-30412.herokuapp.com/images/twitch.png | width=100)
 
 ## Project deployed
 [Twitch notes deployed on heroku](http://glacial-coast-30412.herokuapp.com)
