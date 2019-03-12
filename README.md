@@ -7,16 +7,11 @@
 ## Project tech stack
 The application was made with Laravel and Vue.js. The Backend of the platform was designed with Laravel and the notes management was made with Vue.js, this frontend framework allows interaction with the application without reloading the page, so the live stream isn’t reloaded and interrupted.
 
-
-`Laravel 5.8` for backend.
-
-`Vue.js 2.6.8` for notes management components.
-
-`Bulma 0.7.4` for frontend as css framework.
-
-`PostgreSQL 11` as database.
-
-`AWS S3` for images storage.
+* `Laravel 5.8` for backend.
+* `Vue.js 2.6.8` for notes management components.
+* `Bulma 0.7.4` for frontend as css framework.
+* `PostgreSQL 11` as database.
+* `AWS S3` for images storage.
 
 ## Project motivations
 This application was designed as proof of concept to explore the integration of Laravel and Twitch API. The application pretends to fulfill some users needs, since there are a lot of tools for streamers but not enough for content consumers.
@@ -42,8 +37,10 @@ The goal is to display created notes on stored videos, so you can see each note 
 * Below you are going to see notes created for the streamer.
 * On the right side the 10 latest videos stored representing the latest events streamed.
 
+#### Main page
 ![Application running](http://glacial-coast-30412.herokuapp.com/images/twitch-notes-ss.png)
 
+#### Streamer page
 ![Streamer page](http://glacial-coast-30412.herokuapp.com/images/twitch-streamer.png)
 
 ### Limitations
