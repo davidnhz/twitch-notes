@@ -14,17 +14,17 @@ The application was made with Laravel and Vue.js. The Backend of the platform wa
 * `AWS S3` for images storage.
 
 ## Project motivations
-This application was designed as proof of concept to explore the integration of Laravel and Twitch API. The application pretends to fulfill some users needs, since there are a lot of tools for streamers but not enough for content consumers.
+This application was designed as proof of concept to explore the integration of Laravel and Twitch API. The application pretends to give stream consumers a tool, since there are a lot of tools for streamers but not enough for content consumers. Currently Twitch allows streamers to create markers so they can highlight moments during live streaming, so this application intends to allow consumers do the same.
 
 ## Project description
-Twitcher Notes is an application where you can create personal notes during live streams of your favorite streamers. You can add the nickname of your favorites streamers and then you are going to be able to add notes while you are watching the live stream, these notes are going to take a screenshot of the livestream to display it as a card. You can revisit your ideas and comments created during streams for education, analysis, or entertainment purposes.
+Twitcher Notes is an application where you can create personal notes during live streams of your favorite streamers. By adding the nickname of your favorites streamers you are going to be able to add a time markers with a note and a stream screenshot while you are watching the live stream. You can revisit your ideas and comments created during streams for education, analysis, or fun.
 
-Currently Twitch allows streamers to create markers so they can highlight moments during live streaming, so this application intends to allow the consumers do the same.
-
-The goal is to display created notes on stored videos, so you can see each note appearing during the exact time where you created it during live stream. 
+The final goal is to display created notes on stored videos, so you can see each note popping up on reruns during the exact time where you created it during live stream. 
 
 ### Features/Sections
-* You require a Twitch account to login.
+These are the current features and sections developed:
+
+* You can login using your twitch account.
 * Once logged you are going to see a form where you can add a streamer nickname.
 * Streamers added are going to be displayed on a table under the form.
 * On the left side of the table you can see the avatar and nickname of the streamer.
@@ -79,9 +79,14 @@ The proposed architecture for the platform on AWS is as follows:
 With a lot of traffic and requests the load to the EC2 instances could be very costly and pron to failure. To scale going, for example, from 100 reqs/day to 900MM reqs/day over 6 months, a good approach could be creating a serverless architecture using AWS Lambda functions, saving a lot of resources and with the advantage of auto escaling. To create lambdas we could use Lumen, a lighter version of laravel. The frontend could be developed entirely with Vue.js and stored on S3 as static files, to save procesing resources.
 
 ## Next steps
+This project is a WIP so here you can find listed some future features:
+
 * Link note with stored video.
 * Add notes to past events.
 * Create marker before adding text to the note, so the time of creation will be more accurate.
 * Search and paginate notes.
 * Watch stored videos with notes popping up at the time it was created during stream.
 * Share notes with friends: this feature requires more social network functionalities such as connect users.
+
+## Conclusions
+Since this was a PoC for the technical feasibility, the idea is yet to be validated with users to know if they would use a tool like this. The gaming and streaming industry is still growing and evolving, so some new discoveries could be made by experimenting.
