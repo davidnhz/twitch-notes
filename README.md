@@ -5,6 +5,9 @@
 [Twitch notes deployed on heroku](http://glacial-coast-30412.herokuapp.com)
 
 ## Project tech stack
+The application was made with Laravel and Vue.js. The Backend of the platform was designed with Laravel and the notes management was made with Vue.js, this frontend framework allows interaction with the application without reloading the page, so the live stream isn’t reloaded and interrupted.
+
+
 `Laravel 5.8` for backend.
 
 `Vue.js 2.6.8` for notes management components.
@@ -25,11 +28,18 @@ Currently Twitch allows streamers to create markers so they can highlight moment
 
 The goal is to display created notes on stored videos, so you can see each note appearing during the exact time where you created it during live stream. 
 
-You require a Twitch account to login, once logged you are going to see a form where you can add a streamer nickname, once added it’s going to be displayed on a streamers table, on the left side you can see the avatar and nickname of the streamer, if the streamer is live streaming right now you are going to see a green icon with a camera; on the right side you are going to see a yellow icon with the number of notes created, and finally a button to delete the streamer. On the right side of the page, you are going to see the 10 latest notes created if any.
-
-If you click the streamer’s nickname you are going to be redirected to the single page for the streamer, where the live stream and chat is going to be displayed, below you are going to see notes created for the streamer and on the right side the 10 latest videos stored representing the latest events streamed of the streamers.
-
-The notes management was made with Vue.js because this frontend framework allows interaction with the application without reloading the page, so the live stream isn’t reloaded and interrupted.
+* You require a Twitch account to login.
+* Once logged you are going to see a form where you can add a streamer nickname.
+* Streamers added are going to be displayed on a table under the form.
+* On the left side of the table you can see the avatar and nickname of the streamer.
+* If the streamer is live streaming right now you are going to see a green icon with a camera.
+* On the right side you are going to see a yellow icon with the number of notes created.
+* A button to delete the streamer is going to be available. 
+* On the right side of the page, you are going to see the 10 latest notes created if any.
+* If you click the streamer’s nickname you are going to be redirected to the single page for the streamer.
+* On streamer's page the live stream and chat are going to be displayed.
+* Below you are going to see notes created for the streamer.
+* On the right side the 10 latest videos stored representing the latest events streamed.
 
 ![Application running](http://glacial-coast-30412.herokuapp.com/images/twitch-notes-ss.png)
 
@@ -74,4 +84,4 @@ The proposed architecture for the platform on AWS is as follows:
 ![AWS Architecture](http://glacial-coast-30412.herokuapp.com/images/tnotes.jpg)
 
 ## Scaling the platform
-With a lot of traffic and requests the load to the EC2 instances could be very costly and pron to failure. To scale going, for example, from 100 reqs/day to 900MM reqs/day over 6 months, a good approach could be creating a serverless architecture using AWS Lambda functions. To create lambdas Lumen, lighter version of laravel, could be used. The frontend could be developed entirely with Vue.js and stored on S3.
+With a lot of traffic and requests the load to the EC2 instances could be very costly and pron to failure. To scale going, for example, from 100 reqs/day to 900MM reqs/day over 6 months, a good approach could be creating a serverless architecture using AWS Lambda functions, saving a lot of resources and with the advantage of auto escaling. To create lambdas we could use Lumen, a lighter version of laravel. The frontend could be developed entirely with Vue.js and stored on S3 as static files, to save procesing resources.
