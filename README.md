@@ -74,10 +74,10 @@ npm run dev
 ## Architecture
 The proposed architecture for the platform on AWS is as follows:
 
-![AWS Architecture](http://glacial-coast-30412.herokuapp.com/images/tnotes.jpg)
+![AWS Architecture](http://glacial-coast-30412.herokuapp.com/images/tnotes.png)
 
 ## Scaling the platform
-With a lot of traffic and requests the load to the EC2 instances could be very costly and pron to failure. To scale going, for example, from 100 reqs/day to 900MM reqs/day over 6 months, a good approach could be creating a serverless architecture using AWS Lambda functions, saving a lot of resources and with the advantage of auto scaling. To create lambdas we could use Lumen, a lighter version of laravel. The frontend could be developed entirely with Vue.js and stored on S3 as static files, to save processing resources.
+With a lot of traffic and requests the load to the EC2 instances could be very costly and pron to failure. To scale going, for example, from 100 reqs/day to 900MM reqs/day over 6 months, a good approach could be creating a serverless architecture using AWS Lambda functions, saving a lot of resources and with the advantage of automatic scaling. To create lambdas we could use Lumen, a lighter version of laravel. The frontend could be developed entirely with Vue.js and stored on S3 as static files, to save processing resources. The databse could be DynamoDB since it can handle more than 10 trillion requests per day and fits with a serverless architecture.
 
 ## Next steps
 This project is a WIP so here you can find listed some future features:
