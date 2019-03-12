@@ -21,22 +21,22 @@ Twitcher Notes is an application where you can create personal notes during live
 
 The final goal is to display created notes on stored videos, so you can see each note popping up on reruns during the exact time where you created it during live stream. 
 
-### Features/Sections
+### Features
 These are the current features and sections developed:
 
-* You can login using your twitch account.
-* Once logged you are going to see a form where you can add a streamer nickname.
-* Streamers added are going to be displayed on a table under the form.
-* On the left side of the table you can see the avatar and nickname of the streamer.
-* If the streamer is live streaming right now you are going to see a green icon with a camera.
-* On the right side you are going to see a yellow icon with the number of notes created.
-* A button to delete the streamer is going to be available. 
-* On the right side of the page, you are going to see the 10 latest notes created if any.
-* If you click the streamer’s nickname you are going to be redirected to the single page for the streamer.
-* On streamer's page the live stream and chat are going to be displayed.
-* Below you are going to see notes a form to create notes.
-* Notes created for the streamer will be listed below the form with edit and delete options.
-* On the right side the 10 latest videos stored representing the latest events streamed.
+* Login using your twitch account.
+* Form to add a streamer nickname.
+* List of streamers added.
+* Display avatar and nickname of the streamer.
+* Display a green icon with a camera if the streamer is live streaming.
+* Display yellow icon with the number of notes created.
+* Delete the streamer. 
+* Display 10 latest notes created if any.
+* Go to the single page for the streamer through the streamer link.
+* Display the live stream and chat of the streamer.
+* Form to create notes.
+* Display cards for each note with edit and delete options.
+* Display the 10 latest videos stored representing the latest events streamed.
 
 #### Main page
 ![Application running](http://glacial-coast-30412.herokuapp.com/images/twitch-notes-ss.png)
