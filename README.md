@@ -34,7 +34,8 @@ These are the current features and sections developed:
 * On the right side of the page, you are going to see the 10 latest notes created if any.
 * If you click the streamer’s nickname you are going to be redirected to the single page for the streamer.
 * On streamer's page the live stream and chat are going to be displayed.
-* Below you are going to see notes created for the streamer.
+* Below you are going to see notes a form to create notes.
+* Notes created for the streamer will be listed below the form with edit and delete options.
 * On the right side the 10 latest videos stored representing the latest events streamed.
 
 #### Main page
