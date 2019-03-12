@@ -9,6 +9,8 @@
 
 `Vue.js 2.6.8` for notes management components.
 
+`Bulma 0.7.4` for frontend as css framework.
+
 `PostgreSQL 11` as database.
 
 `AWS S3` for images storage.
@@ -17,35 +19,34 @@
 This application was designed as proof of concept to explore the integration of Laravel and Twitch API. The application pretends to fulfill some users needs, since there are a lot of tools for streamers but not enough for content consumers.
 
 ## Project description
-Twitcher Notes is an application where you can create personal notes during live streams of your favorite streamers. You just have to add the nickname of your favorites streamers and then you are going to be able to add notes while you are watching the live stream. You can revisit your ideas and comments created during streams for education, analysis or entertainment purposes.
+Twitcher Notes is an application where you can create personal notes during live streams of your favorite streamers. You can add the nickname of your favorites streamers and then you are going to be able to add notes while you are watching the live stream, these notes are going to take a screenshot of the livestream to display it as a card. You can revisit your ideas and comments created during streams for education, analysis, or entertainment purposes.
 
 Currently Twitch allows streamers to create markers so they can highlight moments during live streaming, so this application intends to allow the consumers do the same.
 
-The goal is to display created notes on stored videos, so you can see each note appears during the exact time where you created it during live stream. Twitch API has some limitations making hard to achieve this goal. 
+The goal is to display created notes on stored videos, so you can see each note appearing during the exact time where you created it during live stream. 
 
-The application requires that user has a Twitch account to login it, once logged you are going to see a form where you can add a streamer nickname, once added it’s going to be displayed on a streamers table, on the left side you can see the avatar and nickname of the streamer, if the streamer is live streaming right now you are going to see a green icon with a camera; on the right side you are going to see a yellow icon with the number of notes created, and finally a button to delete the streamer. On the right side of the page, you are going to see the 10 latest notes created if any.
+You require a Twitch account to login, once logged you are going to see a form where you can add a streamer nickname, once added it’s going to be displayed on a streamers table, on the left side you can see the avatar and nickname of the streamer, if the streamer is live streaming right now you are going to see a green icon with a camera; on the right side you are going to see a yellow icon with the number of notes created, and finally a button to delete the streamer. On the right side of the page, you are going to see the 10 latest notes created if any.
 
 If you click the streamer’s nickname you are going to be redirected to the single page for the streamer, where the live stream and chat is going to be displayed, below you are going to see notes created for the streamer and on the right side the 10 latest videos stored representing the latest events streamed of the streamers.
 
 The notes management was made with Vue.js because this frontend framework allows interaction with the application without reloading the page, so the live stream isn’t reloaded and interrupted.
 
-
-### Screenshot of the aaplication dashboard
 ![Application running](http://glacial-coast-30412.herokuapp.com/images/twitch-notes-ss.png)
 
 ### Limitations
-There is no way to link the current live stream with the stored video that is going to be created for the stream, one workaround to this limitation is to assume that latest video created is the video for the stream, but this is only going to work if streamer has activated the storing streams feature.
+Twitch API has some limitations. There is no way to link the current live stream with the video that is going to be stored for the stream, a workaround to this limitation is to assume that latest video created is the video for the stream, but this only works if the streamer has activated 'Archive broadcasts' option.
 
-The Screenshot retrieved from the stream when a note is created isn't taken at the current time, it is cached like 10 minutes so the image of the note doesn't really represents the moment when the note was created.
+Another limitation is the Screenshot retrieved from the stream when a note is created because isn't taken at the current time, it is cached like 10 minutes so the image of the note doesn't really represents the moment when the note was created.
 
 ## Next steps
 * Link note with stored video.
 * Add notes to past events.
 * Create marker before adding text to the note, so the time of creation will be more accurate.
+* Search and paginate notes.
 * Watch stored videos with notes popping up at the time it was created during stream.
 * Share notes with friends: this feature requires more social network functionalities such as connect users.
 
-## To run the project
+## How to run the project
 Make sure you have installed `composer`, `npm` and `Node.js`, also a database server running like `PostgreSQL` or `MySQL`.
 
 ```
@@ -66,3 +67,11 @@ npm run dev
 
 # Go to http://localhost to see the app running
 ```
+
+## Architecture
+The proposed architecture for the platform on AWS is as follows:
+
+![AWS Architecture](http://glacial-coast-30412.herokuapp.com/images/tnotes.jpg)
+
+## Scaling the platform
+With a lot of traffic and requests the load to the EC2 instances could be very costly and pron to failure. To scale going, for example, from 100 reqs/day to 900MM reqs/day over 6 months, a good approach could be creating a serverless architecture using AWS Lambda functions. To create lambdas Lumen, lighter version of laravel, could be used. The frontend could be developed entirely with Vue.js and stored on S3.
