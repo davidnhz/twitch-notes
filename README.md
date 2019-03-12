@@ -28,6 +28,7 @@ Currently Twitch allows streamers to create markers so they can highlight moment
 
 The goal is to display created notes on stored videos, so you can see each note appearing during the exact time where you created it during live stream. 
 
+### Features/Sections
 * You require a Twitch account to login.
 * Once logged you are going to see a form where you can add a streamer nickname.
 * Streamers added are going to be displayed on a table under the form.
@@ -42,6 +43,8 @@ The goal is to display created notes on stored videos, so you can see each note 
 * On the right side the 10 latest videos stored representing the latest events streamed.
 
 ![Application running](http://glacial-coast-30412.herokuapp.com/images/twitch-notes-ss.png)
+
+![Streamer page](http://glacial-coast-30412.herokuapp.com/images/twitch-streamer.png)
 
 ### Limitations
 Twitch API has some limitations. There is no way to link the current live stream with the video that is going to be stored for the stream, a workaround to this limitation is to assume that latest video created is the video for the stream, but this only works if the streamer has activated 'Archive broadcasts' option.
