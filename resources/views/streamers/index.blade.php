@@ -85,7 +85,7 @@
                     </div>
                 @endif
                 <div class="column is-half">
-                    <h4 class="title">Latests Notes</h4>
+                    <h4 class="title">Latest Notes</h4>
                     <div id="app">
                         <notes-component :streamer="0"></notes-component>
                     </div>

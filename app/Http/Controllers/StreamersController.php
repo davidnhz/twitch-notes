@@ -43,6 +43,7 @@ class StreamersController extends Controller
     {
         $attributes = $this->validateStreamer();
         $attributes['user_id'] = auth()->id();
+        $attributes['nickname'] = str_replace(' ', '', $attributes['nickname']);
 
         if ($errors = $this->checkIfValid($attributes))
         {
