@@ -93,6 +93,6 @@ The proposed architecture for production on AWS is as follows:
 ![AWS Architecture](http://glacial-coast-30412.herokuapp.com/images/twitch-notes-arch.png)
 
 ## Conclusions
-The intention of PoC was validate technical feasibility. Some limitations on the Twitch API were found, so it will require further research and planning. The idea as a product is yet to be validated with users to know if they would use a tool like this. 
+The intention of this PoC was validate technical feasibility. Some limitations on the Twitch API were found, so it will require further research and planning. The idea as a product is yet to be validated with users to know if they would use a tool like this. 
 
-The gaming and streaming industry is still growing and evolving and some new discoveries could be made by experimenting.
+The gaming and streaming industry is still growing and evolving and new discoveries could be made by experimenting.
