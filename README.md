@@ -47,7 +47,7 @@ These are the current features and sections developed:
 ### Limitations
 Twitch API has some limitations. There is no way to link the current live stream with the video that is going to be stored for the stream, a workaround to this limitation is to assume that latest video created is the video for the stream, but this only works if the streamer has activated 'Archive broadcasts' option.
 
-Another limitation is the Screenshot retrieved from the stream when a note is created because isn't taken at the current time, it is cached like 10 minutes so the image of the note doesn't really represent the moment when the note was created.
+Another limitation is that the screenshot retrieved from the stream when a note isn't taken at the current time, it is cached like 10 minutes so the image of the note doesn't really represent the moment when the note was created.
 
 ## How to run the project
 Make sure you have installed `composer`, `npm` and `Node.js`, also a database server running like `PostgreSQL` or `MySQL`.
@@ -71,23 +71,26 @@ npm run dev
 # Go to http://localhost to see the app running
 ```
 
-## Architecture
-The proposed architecture for the platform on AWS is as follows:
-
-![AWS Architecture](http://glacial-coast-30412.herokuapp.com/images/tnotes.png)
-
-## Scaling the platform
-With a lot of traffic and requests the load to the EC2 instances could be very costly and pron to failure. To scale going, for example, from 100 reqs/day to 900MM reqs/day over 6 months, a good approach could be creating a serverless architecture using AWS Lambda functions, saving a lot of resources and with the advantage of automatic scaling. To create lambdas we could use Lumen, a lighter version of laravel. The frontend could be developed entirely with Vue.js and stored on S3 as static files, to save processing resources. The databse could be DynamoDB since it can handle more than 10 trillion requests per day and fits with a serverless architecture.
-
 ## Next steps
 This project is a WIP so here you can find listed some future features:
 
-* Link note with stored video.
+* Link note during live stream to related stored video.
 * Add notes to past events.
 * Create a marker before adding text to the note, so the time of creation will be more accurate.
 * Search and paginate notes.
 * Watch stored videos with notes popping up at the time it was created during stream.
 * Share notes with friends: this feature requires more social network functionalities such as connect users.
+
+## Architecture and scaling
+The considerations for the proposed architecture are taking into account the finished application with all future features finished (see Next steps) and the application going from 100 reqs/day to 900MM reqs/day over 6 months. 
+
+AWS services like EC2 and AuroraDB have the advantage of auto scaling, so everytime the demand of your application increases, services can scale automatically. Additionally With services like a CDN and load balancers, scaling a platform has become an easy task.
+
+Elasticsearch is used to make faster indexing and search, but it can provoke a possible bottleneck during the writing process, so for that reason SQS is used through a lambda function, to avoid the insertion in Aurora to be delayed by inserting and indexing in Elasticsearch.
+
+The proposed architecture for production on AWS is as follows:
+
+![AWS Architecture](http://glacial-coast-30412.herokuapp.com/images/tnotes.png)
 
 ## Conclusions
 Since this was a PoC for the technical feasibility, the idea is yet to be validated with users to know if they would use a tool like this. The gaming and streaming industry is still growing and evolving, so some new discoveries could be made by experimenting.
