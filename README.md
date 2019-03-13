@@ -90,7 +90,7 @@ Elasticsearch is used to make faster indexing and search, but it can provoke a p
 
 The proposed architecture for production on AWS is as follows:
 
-![AWS Architecture](http://glacial-coast-30412.herokuapp.com/images/tnotes.png)
+![AWS Architecture](http://glacial-coast-30412.herokuapp.com/images/tnotes-arch.png)
 
 ## Conclusions
 Since this was a PoC for the technical feasibility, the idea is yet to be validated with users to know if they would use a tool like this. The gaming and streaming industry is still growing and evolving, so some new discoveries could be made by experimenting.
