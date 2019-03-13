@@ -82,15 +82,15 @@ This project is a WIP so here you can find listed some future features:
 * Share notes with friends to watch a video and seeing notes from another user: this feature requires more social network functionalities such as connect users.
 
 ## Architecture and scaling
-The considerations for the proposed architecture are taking into account the finished application with all future features finished (see Next steps) and the application going from 100 reqs/day to 900MM reqs/day over 6 months. 
+The considerations for the proposed architecture are taking into account using AWS, deploying the finished application with all future features finished (see Next steps), the application going from 100 reqs/day to 900MM reqs/day over 6 months. 
 
 AWS services like EC2 and AuroraDB have the advantage of auto scaling, so everytime the demand of your application increases, services can scale automatically. Additionally With services like a CDN and load balancers, scaling a platform has become an easy task.
 
-Elasticsearch is used to make faster indexing and search, but it can provoke a possible bottleneck during the writing process, so for that reason SQS is used through a lambda function, to avoid the insertion in Aurora to be delayed by inserting and indexing in Elasticsearch.
+Elasticsearch is used to make faster indexing and search, but it can provoke a possible bottleneck during the writing process, so for that reason SQS is used through a lambda function that sends the data to Elasticsearch, to avoid the insertion in Aurora to be delayed by inserting and indexing in Elasticsearch, considering that AuroraDB will be the source of truth.
 
 The proposed architecture for production on AWS is as follows:
 
-![AWS Architecture](http://glacial-coast-30412.herokuapp.com/images/tnotes-arch.png)
+![AWS Architecture](http://glacial-coast-30412.herokuapp.com/images/twitch-notes-arch.png)
 
 ## Conclusions
 Since this was a PoC for the technical feasibility, the idea is yet to be validated with users to know if they would use a tool like this. The gaming and streaming industry is still growing and evolving, so some new discoveries could be made by experimenting.
