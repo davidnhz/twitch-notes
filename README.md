@@ -79,7 +79,7 @@ This project is a WIP so here you can find listed some future features:
 * Create a marker before adding text to the note, so the time of creation will be more accurate.
 * Search and paginate notes.
 * Watch stored videos with notes popping up at the time it was created during stream.
-* Share notes with friends: this feature requires more social network functionalities such as connect users.
+* Share notes with friends to watch a video and seeing notes from another user: this feature requires more social network functionalities such as connect users.
 
 ## Architecture and scaling
 The considerations for the proposed architecture are taking into account the finished application with all future features finished (see Next steps) and the application going from 100 reqs/day to 900MM reqs/day over 6 months. 
