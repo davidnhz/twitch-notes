@@ -68,7 +68,7 @@ npm install
 # Run Vue on developer mode
 npm run dev
 
-# Go to http://localhost to see the app running
+# Go to http://localhost:3000 to see the app running
 ```
 
 ## Next steps
